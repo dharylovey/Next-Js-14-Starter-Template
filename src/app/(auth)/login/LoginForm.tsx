@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -25,6 +26,10 @@ import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import LoginSubmitBtn from './LoginSubmitBtn';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Separator } from '@/components/ui/separator';
+import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
+import { FcGoogle } from 'react-icons/fc';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -117,9 +122,35 @@ export default function LoginForm() {
                   </FormItem>
                 )}
               />
-              <LoginSubmitBtn isSubmitting={isSubmitting}>Login</LoginSubmitBtn>
+              <LoginSubmitBtn isSubmitting={isSubmitting}>
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <ClipLoader size={20} color="text-primary" />{' '}
+                    <span>Logging in...</span>
+                  </div>
+                ) : (
+                  'Login'
+                )}
+              </LoginSubmitBtn>
             </CardContent>
           </form>
+          <CardFooter className="flex flex-col items-center gap-4">
+            <Separator className="w-full" />
+            <GoogleAuthButton>
+              <FcGoogle className="h-6 w-6" />
+              Continue with Google
+            </GoogleAuthButton>
+            <div className="text-sm text-muted-foreground">
+              Don&apos;t have an account?{' '}
+              <Link
+                href="/signup"
+                className="font-medium underline underline-offset-4"
+                prefetch={false}
+              >
+                Sign up
+              </Link>
+            </div>
+          </CardFooter>
         </Form>
       </Card>
     </div>
