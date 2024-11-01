@@ -1,5 +1,7 @@
 'use client';
 
+import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -17,19 +19,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { loginSchema } from '@/zodSchema/loginSchema';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import LoginSubmitBtn from './LoginSubmitBtn';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
-import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
+import { loginSchema } from '@/zodSchema/loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { z } from 'zod';
+import LoginSubmitBtn from './LoginSubmitBtn';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -88,7 +88,7 @@ export default function LoginForm() {
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem className="mb-4">
+                  <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <div className="relative">
