@@ -113,7 +113,6 @@ Add the following script to your **package.json**:
 
 [**Setting Up a Pre-commit Hook with Lint-staged**](https://www.notion.so/Setting-Up-a-Pre-commit-Hook-with-Lint-staged-12625c3b05c7800b869dcdd0e2afae34?pvs=21)
 
-
 # Integrating Tailwind CSS with Prettier
 
 To ensure your Tailwind CSS classes are sorted automatically, use the **prettier-plugin-tailwindcss**
@@ -135,7 +134,6 @@ Add the **prettier-plugin-tailwindcss** to your **.prettierrc**:
 ```
 
 This plugin will automatically sort tailwind classes, ensuring a consistent order.
-
 
 # Setting Up a Pre-commit Hook with Lint-staged
 

@@ -2,10 +2,8 @@
 
 import { ModeToggle } from '@/components/mode-toggle';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const router = useRouter();
   return (
     <nav className="flex items-center justify-between">
       <Link href="/">
