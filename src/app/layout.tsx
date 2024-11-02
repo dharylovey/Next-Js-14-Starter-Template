@@ -31,6 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster
+            duration={2000}
             position="top-center"
             toastOptions={{
               classNames: {
