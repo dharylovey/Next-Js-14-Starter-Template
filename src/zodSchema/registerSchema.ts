@@ -15,7 +15,8 @@ export const registerSchema = z
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?]).{8,}$/,
         {
-          message: 'Use 8+ chars: upper & lowercase, numbers, symbols',
+          message:
+            'Password must be at least 8 characters, with a mix of uppercase and lowercase letters, numbers, and special characters.',
         }
       ),
     confirmPassword: z.string(),
