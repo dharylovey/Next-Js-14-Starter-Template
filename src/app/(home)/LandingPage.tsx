@@ -107,7 +107,7 @@ export default function LandingPage() {
                     <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-primary text-white">
                       <CheckIcon className="h-6 w-6" aria-hidden="true" />
                     </div>
-                    <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
+                    <p className="light:text-gray-900 ml-16 text-lg font-medium leading-6">
                       {feature.name}
                     </p>
                   </dt>
