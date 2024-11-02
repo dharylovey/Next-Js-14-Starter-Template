@@ -10,8 +10,7 @@ export const loginSchema = z.object({
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?]).{8,}$/,
       {
-        message:
-          'Password must be at least 8 characters, with a mix of uppercase and lowercase letters, numbers, and special characters.',
+        message: 'Password must be at least 8 char, number and special char',
       }
     ),
 });
