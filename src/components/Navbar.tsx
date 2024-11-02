@@ -16,7 +16,7 @@ export default function Navbar() {
       </Link>
       <div className="flex items-center gap-2 md:gap-4">
         <ModeToggle />
-        <Button onClick={() => router.push('/login')}>Login</Button>
+        <Button onClick={() => router.push('/auth/login')}>Login</Button>
       </div>
     </nav>
   );

@@ -5,8 +5,7 @@ export const registerSchema = z
     name: z
       .string()
       .min(1, 'Name is required')
-      .max(20, 'Name must be less than 20 characters')
-      .regex(/^[a-zA-Z]+$/, { message: 'Name must contain only letters' }),
+      .max(50, 'Name must be less than 50 characters'),
     email: z
       .string()
       .min(1, 'Email is required')

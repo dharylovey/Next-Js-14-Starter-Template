@@ -145,7 +145,7 @@ export default function LoginForm() {
             <div className="text-sm text-muted-foreground">
               Don&apos;t have an account?{' '}
               <Link
-                href="/signup"
+                href="/auth/signup"
                 className="font-medium underline underline-offset-4"
                 prefetch={false}
               >
