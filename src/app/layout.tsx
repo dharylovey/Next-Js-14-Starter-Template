@@ -1,13 +1,13 @@
-import { ThemeProvider } from '@/components/theme-providers';
 import type { Metadata } from 'next';
-import { DynaPuff } from 'next/font/google';
-import React from 'react';
 import './globals.css';
+import React from 'react';
+import { ThemeProvider } from '@/components/theme-providers';
+import { Quicksand } from 'next/font/google';
 
-const dynaPuffFont = DynaPuff({
+const quicksandFont = Quicksand({
+  variable: '--font-quicksand',
   subsets: ['latin'],
-  variable: '--font-dyna-puff',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={` ${dynaPuffFont.variable} antialiased`}>
+      <body className={` ${quicksandFont.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

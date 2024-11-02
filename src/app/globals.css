@@ -67,10 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
-:root {
-  --font-dyna-puff: 'DynaPuff', sans-serif; /* Set fallback font */
-}
 
 body {
-  font-family: var(--font-dyna-puff);
+  font-family: 'Quicksand', sans-serif;
 }
