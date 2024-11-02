@@ -96,6 +96,11 @@ export default function LoginForm() {
                         placeholder="example@mail.com "
                         {...field}
                         disabled={isSubmitting}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault();
+                          }
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -118,9 +123,9 @@ export default function LoginForm() {
                           {...field}
                           disabled={isSubmitting}
                         />
-                        <button
+                        <span
                           onClick={toggleShowPassword}
-                          className="absolute right-6 top-1/2 -translate-y-1/2"
+                          className="absolute right-6 top-1/2 -translate-y-1/2 cursor-pointer"
                           tabIndex={-1}
                         >
                           {showPassword ? (
@@ -128,7 +133,7 @@ export default function LoginForm() {
                           ) : (
                             <EyeClosedIcon className="h-5 w-5" />
                           )}
-                        </button>
+                        </span>
                       </div>
                     </FormControl>
                     <FormMessage />

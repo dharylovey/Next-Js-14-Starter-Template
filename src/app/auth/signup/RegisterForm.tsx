@@ -107,6 +107,11 @@ export default function RegisterForm() {
                         autoComplete=""
                         autoCapitalize="true"
                         disabled={isSubmitting}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault();
+                          }
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -125,6 +130,11 @@ export default function RegisterForm() {
                         placeholder="example@mail.com "
                         {...field}
                         disabled={isSubmitting}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault();
+                          }
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -146,10 +156,15 @@ export default function RegisterForm() {
                           }
                           {...field}
                           disabled={isSubmitting}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                              event.preventDefault();
+                            }
+                          }}
                         />
-                        <button
+                        <span
                           onClick={toggleShowPassword}
-                          className="absolute right-6 top-1/2 -translate-y-1/2"
+                          className="absolute right-6 top-1/2 -translate-y-1/2 cursor-pointer"
                           tabIndex={-1}
                         >
                           {showPassword ? (
@@ -157,7 +172,7 @@ export default function RegisterForm() {
                           ) : (
                             <EyeClosedIcon className="h-5 w-5" />
                           )}
-                        </button>
+                        </span>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -182,9 +197,9 @@ export default function RegisterForm() {
                           {...field}
                           disabled={isSubmitting}
                         />
-                        <button
+                        <span
                           onClick={toggleShowConfirmPassword}
-                          className="absolute right-6 top-1/2 -translate-y-1/2"
+                          className="absolute right-6 top-1/2 -translate-y-1/2 cursor-pointer"
                           tabIndex={-1}
                         >
                           {showConfirmPassword ? (
@@ -192,7 +207,7 @@ export default function RegisterForm() {
                           ) : (
                             <EyeClosedIcon className="h-5 w-5" />
                           )}
-                        </button>
+                        </span>
                       </div>
                     </FormControl>
                     <FormMessage />
