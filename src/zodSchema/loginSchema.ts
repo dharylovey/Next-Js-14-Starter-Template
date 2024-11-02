@@ -12,3 +12,5 @@ export const loginSchema = z.object({
         'Password must contain at least one uppercase letter, one special character, and be at least 8 characters long.',
     }),
 });
+
+export type LoginSchemaType = z.infer<typeof loginSchema>;

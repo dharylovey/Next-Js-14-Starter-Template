@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { loginSchema } from '@/zodSchema/loginSchema';
+import { loginSchema, LoginSchemaType } from '@/zodSchema/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
@@ -40,7 +40,7 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const form = useForm<z.infer<typeof loginSchema>>({
+  const form = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
@@ -57,6 +57,7 @@ export default function LoginForm() {
     const result = loginSchema.safeParse(data);
     console.log(result);
   };
+
   return (
     <div className="flex items-center justify-center">
       <Card className="w-[400px]">
