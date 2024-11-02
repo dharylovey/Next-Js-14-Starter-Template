@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import React from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { Button } from '@/components/ui/button';
 
 const features = [
   {
@@ -55,30 +55,20 @@ export default function LandingPage() {
           <div className="text-center">
             <h1 className="light:text-gray-900 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
               <span className="block">Welcome to</span>
-              <span className="block text-indigo-600">Next JS Starter</span>
+              <span className="block text-primary">Next JS Starter</span>
             </h1>
             <p className="mx-auto mt-3 max-w-md text-base text-gray-500 sm:text-lg md:mt-5 md:max-w-3xl md:text-xl">
               Kickstart your journey with our innovative solution. Easily
               organize your workflow, get more done in less time, and achieve
               your goals - even if youre just starting out.
             </p>
-            <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
-              <div className="rounded-md shadow">
-                <Link
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/90 md:px-10 md:py-4 md:text-lg"
-                >
-                  Get started
-                </Link>
-              </div>
-              <div className="mt-3 rounded-md shadow sm:ml-3 sm:mt-0">
-                <Link
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-primary hover:bg-gray-50 md:px-10 md:py-4 md:text-lg"
-                >
-                  Learn more
-                </Link>
-              </div>
+            <div className="mx-auto mt-5 max-w-md gap-2 sm:flex sm:justify-center md:mt-8">
+              <Button size={'lg'} className="text-white">
+                Get started
+              </Button>
+              <Button variant="secondary" size={'lg'}>
+                Learn more
+              </Button>
             </div>
           </div>
         </div>
