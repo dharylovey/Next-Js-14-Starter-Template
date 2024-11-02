@@ -7,7 +7,7 @@ const features = ['About', 'Blog'];
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800">
+    <footer className="border-t">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <nav
           className="-mx-5 -my-2 flex flex-wrap justify-center"
@@ -17,7 +17,7 @@ export default function Footer() {
             <div key={item} className="px-5 py-2">
               <Link
                 href="#"
-                className="text-base text-gray-400 hover:text-gray-300"
+                className="text-base text-foreground hover:text-primary"
               >
                 {item}
               </Link>
