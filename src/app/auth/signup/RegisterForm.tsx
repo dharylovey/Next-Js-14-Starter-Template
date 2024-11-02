@@ -1,5 +1,7 @@
 'use client';
 
+import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
+import SubmitAuthBtn from '@/components/Auth_component/SubmitAuthBtn';
 import {
   Card,
   CardContent,
@@ -17,18 +19,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { registerSchema, RegisterSchemaType } from '@/zodSchema/registerSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import React from 'react';
-import RegisterSubmitBtn from './RegisterSubmitBtn';
-import ClipLoader from 'react-spinners/ClipLoader';
-import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
-import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -74,9 +73,9 @@ export default function RegisterForm() {
             Fill out the form below, to create an account
           </CardDescription>
         </CardHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CardContent>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name="name"
@@ -160,7 +159,7 @@ export default function RegisterForm() {
                           type={showConfirmPassword ? 'text' : 'password'}
                           placeholder={
                             showConfirmPassword
-                              ? 'Enter your password'
+                              ? 'Please re-enter your password'
                               : '*********'
                           }
                           {...field}
@@ -183,7 +182,7 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-              <RegisterSubmitBtn isSubmitting={isSubmitting}>
+              <SubmitAuthBtn isSubmitting={isSubmitting}>
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <ClipLoader size={20} color="text-primary" />{' '}
@@ -192,27 +191,27 @@ export default function RegisterForm() {
                 ) : (
                   'Create Account'
                 )}
-              </RegisterSubmitBtn>
-            </CardContent>
-          </form>
-          <CardFooter className="flex flex-col items-center gap-4">
-            <Separator className="w-full" />
-            <GoogleAuthButton>
-              <FcGoogle className="h-6 w-6" />
-              Continue with Google
-            </GoogleAuthButton>
-            <div className="text-sm text-muted-foreground">
-              Already have an account?{' '}
-              <Link
-                href="/auth/login"
-                className="font-medium underline underline-offset-4"
-                prefetch={false}
-              >
-                Sign in
-              </Link>
-            </div>
-          </CardFooter>
-        </Form>
+              </SubmitAuthBtn>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="flex flex-col items-center gap-4">
+          <Separator className="w-full" />
+          <GoogleAuthButton>
+            <FcGoogle className="h-6 w-6" />
+            Continue with Google
+          </GoogleAuthButton>
+          <div className="text-sm text-muted-foreground">
+            Already have an account?{' '}
+            <Link
+              href="/auth/login"
+              className="font-medium underline underline-offset-4"
+              prefetch={false}
+            >
+              Sign in
+            </Link>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );

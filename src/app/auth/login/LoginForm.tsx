@@ -1,6 +1,7 @@
 'use client';
 
 import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
+import SubmitAuthBtn from '@/components/Auth_component/SubmitAuthBtn';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -24,13 +25,11 @@ import { loginSchema, LoginSchemaType } from '@/zodSchema/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { z } from 'zod';
-import LoginSubmitBtn from './LoginSubmitBtn';
-import React from 'react';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,9 +64,9 @@ export default function LoginForm() {
           <CardTitle>Login</CardTitle>
           <CardDescription>Please login to your account.</CardDescription>
         </CardHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CardContent>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name="email"
@@ -115,16 +114,16 @@ export default function LoginForm() {
                         </button>
                       </div>
                     </FormControl>
+                    <FormMessage />
                     <Button variant="link" size={'sm'} asChild className="px-0">
                       <Link href={'/auth/forgot-password'}>
                         Forgot password?
                       </Link>
                     </Button>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
-              <LoginSubmitBtn isSubmitting={isSubmitting}>
+              <SubmitAuthBtn isSubmitting={isSubmitting}>
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <ClipLoader size={20} color="text-primary" />{' '}
@@ -133,27 +132,27 @@ export default function LoginForm() {
                 ) : (
                   'Login'
                 )}
-              </LoginSubmitBtn>
-            </CardContent>
-          </form>
-          <CardFooter className="flex flex-col items-center gap-4">
-            <Separator className="w-full" />
-            <GoogleAuthButton>
-              <FcGoogle className="h-6 w-6" />
-              Continue with Google
-            </GoogleAuthButton>
-            <div className="text-sm text-muted-foreground">
-              Don&apos;t have an account?{' '}
-              <Link
-                href="/auth/signup"
-                className="font-medium underline underline-offset-4"
-                prefetch={false}
-              >
-                Sign up
-              </Link>
-            </div>
-          </CardFooter>
-        </Form>
+              </SubmitAuthBtn>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="flex flex-col items-center gap-4">
+          <Separator className="w-full" />
+          <GoogleAuthButton>
+            <FcGoogle className="h-6 w-6" />
+            Continue with Google
+          </GoogleAuthButton>
+          <div className="text-sm text-muted-foreground">
+            Don&apos;t have an account?{' '}
+            <Link
+              href="/auth/signup"
+              className="font-medium underline underline-offset-4"
+              prefetch={false}
+            >
+              Sign up
+            </Link>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );

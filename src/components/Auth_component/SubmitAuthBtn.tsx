@@ -8,7 +8,7 @@ interface Props {
   isSubmitting: boolean;
 }
 
-export default function LoginSubmitBtn({ children, isSubmitting }: Props) {
+export default function SubmitAuthBtn({ children, isSubmitting }: Props) {
   return (
     <Button type="submit" className="w-full" disabled={isSubmitting}>
       {children}
