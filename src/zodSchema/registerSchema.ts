@@ -13,21 +13,12 @@ export const registerSchema = z
     password: z
       .string()
       .regex(
-        /^(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?])(?=.*\d).{8,}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?]).{8,}$/,
         {
-          message:
-            'Password must contain at least one uppercase letter, one special character, and be at least 8 characters long.',
+          message: 'Use 8+ chars: upper & lowercase, numbers, symbols',
         }
       ),
-    confirmPassword: z
-      .string()
-      .regex(
-        /^(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?])(?=.*\d).{8,}$/,
-        {
-          message:
-            'Password must contain at least one uppercase letter, one special character, and be at least 8 characters long.',
-        }
-      ),
+    confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',

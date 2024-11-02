@@ -7,10 +7,12 @@ export const loginSchema = z.object({
     .email({ message: 'Invalid email address' }),
   password: z
     .string()
-    .regex(/^(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?])(?=.*\d).{8,}$/, {
-      message:
-        'Password must contain at least one uppercase letter, one special character, and be at least 8 characters long.',
-    }),
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[{\]};:'",<.>/?]).{8,}$/,
+      {
+        message: 'Use 8+ chars: upper & lowercase, numbers, symbols',
+      }
+    ),
 });
 
 export type LoginSchemaType = z.infer<typeof loginSchema>;
