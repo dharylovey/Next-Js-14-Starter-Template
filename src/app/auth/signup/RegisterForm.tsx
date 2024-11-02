@@ -170,7 +170,7 @@ export default function RegisterForm() {
                           className="absolute right-6 top-1/2 -translate-y-1/2"
                           tabIndex={-1}
                         >
-                          {showPassword ? (
+                          {showConfirmPassword ? (
                             <EyeOpenIcon className="h-5 w-5" />
                           ) : (
                             <EyeClosedIcon className="h-5 w-5" />
