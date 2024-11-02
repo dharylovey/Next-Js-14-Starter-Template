@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 import React from 'react';
 import './globals.css';
+import { Toaster } from '@/components/ui/sonner';
 
 const quicksandFont = Quicksand({
   variable: '--font-quicksand',
@@ -29,6 +30,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              classNames: {
+                error: 'bg-red-400',
+                success: 'text-green-400',
+                warning: 'text-yellow-400',
+                info: 'bg-blue-400',
+              },
+            }}
+          />
           {children}
         </ThemeProvider>
       </body>

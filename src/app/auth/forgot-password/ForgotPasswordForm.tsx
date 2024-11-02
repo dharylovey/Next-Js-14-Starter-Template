@@ -29,6 +29,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { toast } from 'sonner';
 
 export default function ForgotPasswordForm() {
   const form = useForm<ForgotPasswordSchemaType>({
@@ -43,13 +44,30 @@ export default function ForgotPasswordForm() {
   } = form;
 
   const onSubmit = async (data: ForgotPasswordSchemaType) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const delay: Promise<{ name: string }> = new Promise((resolve) =>
+      setTimeout(() => resolve({ name: 'Reset link sent to your email' }), 2000)
+    );
     const result = forgotPasswordSchema.safeParse(data);
-    console.log(result);
+
+    try {
+      if (result.success) {
+        toast.promise(delay, {
+          loading: 'Sending reset password link...',
+          success: (item) => `${item.name}`,
+          error: (err) => `An error occurred: ${err.message}`,
+        });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    } finally {
+      form.reset();
+    }
   };
 
   return (
-    <div className="flex h-screen items-center justify-center px-6">
+    <div className="mx-auto flex h-screen items-center justify-center px-6">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Forgot Password?</CardTitle>
@@ -60,7 +78,7 @@ export default function ForgotPasswordForm() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="email"

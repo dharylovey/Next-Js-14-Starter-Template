@@ -29,6 +29,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 export default function LoginForm() {
@@ -52,9 +53,25 @@ export default function LoginForm() {
   } = form;
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const delay: Promise<{ name: string }> = new Promise((resolve) =>
+      setTimeout(() => resolve({ name: 'Successfully logged in!' }), 2000)
+    );
     const result = loginSchema.safeParse(data);
-    console.log(result);
+    try {
+      if (result.success) {
+        toast.promise(delay, {
+          loading: 'Logging in...',
+          success: (item) => `${item.name}`,
+          error: (err) => `An error occurred: ${err.message}`,
+        });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    } finally {
+      form.reset();
+    }
   };
 
   return (
