@@ -65,7 +65,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center px-6">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Register</CardTitle>

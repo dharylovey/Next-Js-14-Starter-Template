@@ -49,7 +49,7 @@ export default function ForgotPasswordForm() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-screen items-center justify-center px-6">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Forgot Password?</CardTitle>
