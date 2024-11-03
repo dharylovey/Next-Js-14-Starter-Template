@@ -1,5 +1,6 @@
 'use client';
 
+import { register } from '@/action/auth/register';
 import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
 import SubmitAuthBtn from '@/components/Auth_component/SubmitAuthBtn';
 import {
@@ -60,17 +61,16 @@ export default function RegisterForm() {
   } = form;
 
   const onSubmit = async (data: RegisterSchemaType) => {
-    const delay: Promise<{ name: string }> = new Promise((resolve) =>
-      setTimeout(() => resolve({ name: 'Account created successfully!' }), 2000)
-    );
     const result = registerSchema.safeParse(data);
     try {
       if (result.success) {
-        toast.promise(delay, {
-          loading: 'Logging in...',
-          success: (item) => `${item.name}`,
-          error: (err) => `An error occurred: ${err.message}`,
+        toast.promise(register(data), {
+          loading: 'Creating account...',
+          success: (success) => success.message,
+          error: (err) => err.message,
         });
+
+        // redirect('/auth/login');
       }
     } catch (error) {
       if (error instanceof Error) {

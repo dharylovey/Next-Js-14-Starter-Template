@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from '@/action/auth/login';
 import GoogleAuthButton from '@/components/Auth_component/GoogleAuthButton';
 import SubmitAuthBtn from '@/components/Auth_component/SubmitAuthBtn';
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,7 @@ import { Separator } from '@/components/ui/separator';
 import { loginSchema, LoginSchemaType } from '@/zodSchema/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { AuthError } from 'next-auth';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,8 +33,11 @@ import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { DEFAULT_REDIRECT } from '@/routes';
 
 export default function LoginForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,24 +58,33 @@ export default function LoginForm() {
   } = form;
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    const delay: Promise<{ name: string }> = new Promise((resolve) =>
-      setTimeout(() => resolve({ name: 'Successfully logged in!' }), 2000)
-    );
     const result = loginSchema.safeParse(data);
+
+    if (!result.success) {
+      toast.error('Invalid email or password');
+      return;
+    }
+
     try {
-      if (result.success) {
-        toast.promise(delay, {
-          loading: 'Logging in...',
-          success: (item) => `${item.name}`,
-          error: (err) => `An error occurred: ${err.message}`,
-        });
+      const response = await login(data);
+
+      if (response.error) {
+        toast.error(response.error);
+        return;
+      }
+
+      if (response.success) {
+        toast.success(response.message);
+        return;
       }
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AuthError) {
+        console.log(error);
         toast.error(error.message);
       }
     } finally {
       form.reset();
+      router.push(DEFAULT_REDIRECT);
     }
   };
 
