@@ -10,7 +10,7 @@ export const register = async (data: z.infer<typeof registerSchema>) => {
   const validatedData = registerSchema.safeParse(data);
 
   if (!validatedData.success) {
-    return { success: false, message: 'Invalid email or password' };
+    return { success: false, error: 'Invalid email or password' };
   }
 
   const { name, email, password } = validatedData.data;
@@ -18,7 +18,7 @@ export const register = async (data: z.infer<typeof registerSchema>) => {
   const existingUser = await getUserByEmail(email);
 
   if (existingUser) {
-    return { success: false, message: 'User already exists' };
+    return { success: false, error: 'User already exists' };
   }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

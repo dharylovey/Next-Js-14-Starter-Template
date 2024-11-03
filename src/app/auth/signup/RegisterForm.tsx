@@ -30,8 +30,10 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -64,13 +66,12 @@ export default function RegisterForm() {
     const result = registerSchema.safeParse(data);
     try {
       if (result.success) {
-        toast.promise(register(data), {
-          loading: 'Creating account...',
-          success: (success) => success.message,
-          error: (err) => err.message,
-        });
-
-        // redirect('/auth/login');
+        const response = await register(data);
+        if (response.error) {
+          toast.error(response.error);
+          return;
+        }
+        toast.success(response.message);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -78,6 +79,7 @@ export default function RegisterForm() {
       }
     } finally {
       form.reset();
+      router.push('/auth/login');
     }
   };
 
