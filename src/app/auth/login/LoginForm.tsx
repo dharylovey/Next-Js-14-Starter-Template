@@ -27,16 +27,28 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { AuthError } from 'next-auth';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DEFAULT_REDIRECT } from '@/routes';
 
 export default function LoginForm() {
+  const searchParams = useSearchParams();
+  const errorUrl =
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already in use!'
+      : '';
+
+  useEffect(() => {
+    if (errorUrl) {
+      toast.error(errorUrl);
+    }
+  }, [errorUrl]);
+
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 

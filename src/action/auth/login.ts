@@ -19,7 +19,7 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
   const existingUser = await getUserByEmail(email);
   // console.log('Existing user:', existingUser);
   if (!existingUser || !existingUser.password || !existingUser.email) {
-    return { error: 'Email does not exist' };
+    return { error: 'Invalid email or password' };
   }
 
   const passwordMatch = await bcrypt.compare(password, existingUser.password);
