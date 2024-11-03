@@ -1,4 +1,9 @@
-export const isPublicRoute = ['/', '/terms-of-service', '/privacy-policy'];
+export const isPublicRoute = [
+  '/',
+  '/auth/verify-email',
+  '/terms-of-service',
+  '/privacy-policy',
+];
 
 export const authRoutes = [
   '/auth/login',
