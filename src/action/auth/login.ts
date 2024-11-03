@@ -6,6 +6,8 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { getUserByEmail } from '@/services/user';
 import bcrypt from 'bcryptjs';
+import { generateVerificationToken } from '@/lib/token';
+import { sendVerificationEmail } from '@/lib/email';
 
 export const login = async (data: z.infer<typeof loginSchema>) => {
   const validatedData = loginSchema.safeParse(data);
@@ -17,7 +19,7 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
   const { email, password } = validatedData.data;
 
   const existingUser = await getUserByEmail(email);
-  // console.log('Existing user:', existingUser);
+
   if (!existingUser || !existingUser.password || !existingUser.email) {
     return { error: 'Invalid email or password' };
   }
@@ -28,7 +30,18 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
     return { error: 'Invalid email or password' };
   }
 
-  //todo email verification
+  if (!existingUser.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email
+    );
+
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
+    );
+
+    return { success: true, message: 'Email confirmation link has been sent!' };
+  }
 
   try {
     await signIn('credentials', {
@@ -39,7 +52,6 @@ export const login = async (data: z.infer<typeof loginSchema>) => {
 
     return { success: true, message: 'Successfully logged in!' };
   } catch (error) {
-    console.error('Error during sign-in:', error);
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
