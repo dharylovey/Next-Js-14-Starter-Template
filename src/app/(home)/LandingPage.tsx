@@ -81,7 +81,7 @@ export default function LandingPage() {
               Features
             </h2>
             <p className="light:text-gray-900 mt-2 text-3xl font-extrabold leading-8 tracking-tight sm:text-4xl">
-              Everything you need to succeed
+              Everything you need to succeed!
             </p>
             <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
               Unlock your full potential with our product, built on the latest
